@@ -19,9 +19,10 @@ from bert import tokenization, modeling
 from bert.extract_features import model_fn_builder, convert_lst_to_features, PoolingStrategy
 from bert_serving.client import BertClient
 
+m_path = './calling-out-bluff/Model4-BERT/'
 #from feature_extractor import FeatureExtractor
 # 加载打分系统配置， 主要是系列模型文件的路径
-with open("config/sys_conf.yaml", encoding="utf-8") as conf_reader:
+with open(m_path+"config/sys_conf.yaml", encoding="utf-8") as conf_reader:
     sys_conf = yaml.load(conf_reader.read())
 
 # do_train: Whether to run training.
@@ -37,10 +38,10 @@ with open("config/sys_conf.yaml", encoding="utf-8") as conf_reader:
 # iterations_per_loop: How many steps to make in each estimator call.
 # prompt_id: the id of the prompt
 # train_set_prob: the Proportion examples from dataset chosen to be the train set
-with open("config/train_conf.json", "r") as cr:
+with open(m_path+"config/train_conf.json", "r") as cr:
     train_conf = json.load(cr)
 
-with open("config/doc_conf.json", "r") as cr:
+with open(m_path+"config/doc_conf.json", "r") as cr:
     doc_conf = json.load(cr)
 
 spacynlp = spacy.load("en_core_web_sm")

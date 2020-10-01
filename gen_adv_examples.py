@@ -168,29 +168,27 @@ def insert_songs_mid(text):
         text_data.insert(int(len(text_data)/2), i)
     return ''.join(text_data)
 
-def create_song_data(data_test, begin = False, end = False, mid = False):
-	
-	with open('song.pickle', 'rb') as handle:
-    	song= pickle.load(handle)
+def create_song_data(data_test, begin = False, end = False, mid = False):	
+    with open('calling_out_bluff/Model3(SkipFlow)/song.pickle', 'rb') as handle:
+        song= pickle.load(handle)
+    song_lyric=[]
+    for i in song:
+      song_lyric.append(tokenize.sent_tokenize(i))
+    songs = [x for sublist in song_lyric for x in sublist]
 
-	song_lyric=[]
-	for i in song:
-	    song_lyric.append(tokenize.sent_tokenize(i))
-	songs = [x for sublist in song_lyric for x in sublist]
-
-	if begin:
-		songs_beg=[]
-		for i,r in enumerate(data_test):
-		    songs_beg.append(insert_songs_beg(r))
+    if begin:
+    songs_beg=[]
+    for i,r in enumerate(data_test):
+        songs_beg.append(insert_songs_beg(r))
 
     if end:
-		songs_end=[]
-		for i,r in enumerate(data_test):
-		    songs_end.append(insert_songs_end(r))
+    songs_end=[]
+    for i,r in enumerate(data_test):
+        songs_end.append(insert_songs_end(r))
 
-	if mid:
-		songs_mid=[]
-		for i,r in enumerate(data_test):
-		    songs_mid.append(insert_songs_mid(r))
+    if mid:
+    songs_mid=[]
+    for i,r in enumerate(data_test):
+        songs_mid.append(insert_songs_mid(r))
 
     return songs_beg, songs_end, songs_mid
