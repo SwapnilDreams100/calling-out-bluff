@@ -60,7 +60,7 @@ class BasicScorePredictor:
             correspond_train_id_set: 分割的训练集id
             correspond_test_id_set: 分割的测试集id
         """
-        articles_id, articles_set, set_ids, handmark_scores = read_asap_dataset()
+        articles_id, articles_set, set_ids, handmark_scores = read_asap_dataset2()
         np.random.seed(train_conf["random_seed"])
         if generate_type == "shuffle_prompt":
             # 在每个set内80%用来训练，20%用来测试
