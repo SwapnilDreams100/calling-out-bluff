@@ -395,7 +395,7 @@ class CoherenceScore:
             correspond_train_id_set: 分割的训练集id
             correspond_test_id_set: 分割的测试集id
         """
-        articles_id, articles_set, set_ids, handmark_scores = read_asap_dataset()
+        articles_id, articles_set, set_ids, handmark_scores = read_asap_dataset2()
         np.random.seed(train_conf["random_seed"])
 
         if generate_type == "shuffle_prompt":
@@ -672,7 +672,7 @@ class PromptRelevantScore:
             correspond_train_id_set: 分割的训练集id
             correspond_test_id_set: 分割的测试集id
         """
-        articles_id, articles_set, set_ids, handmark_scores = read_asap_dataset()
+        articles_id, articles_set, set_ids, handmark_scores = read_asap_dataset2()
         np.random.seed(train_conf["random_seed"])
 
         permutation_ids = np.random.permutation(set_ids[train_conf["prompt_id"]])
@@ -956,7 +956,7 @@ class OverallScorePredictor:
             correspond_train_id_set: 分割的训练集id
             correspond_test_id_set: 分割的测试集id
         """
-        articles_id, articles_set, set_ids, handmark_scores = read_asap_dataset()
+        articles_id, articles_set, set_ids, handmark_scores = read_asap_dataset2()
 #         print("handmark scores", handmark_scores)
 #         handmark_normalized_scores = {}
 #         for key, value in handmark_scores.items():
@@ -1069,7 +1069,7 @@ class OverallScorePredictor:
         features = np.load(xgboost_train_file_path, allow_pickle=True)["features"][()]
         print(len(features))
         print("DONE XGBOOST_TRAIN_FILE_PATH LOADED")
-        articles_id, articles_set, set_ids, handmark_scores = read_asap_dataset()
+        articles_id, articles_set, set_ids, handmark_scores = read_asap_dataset2()
         
         handmark_normalized_scores = {}
         for key, value in handmark_scores.items():

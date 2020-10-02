@@ -860,5 +860,5 @@ if __name__ == "__main__":
     read_dataset_into_tfrecord(m_path+"dataset/", bw)
     
     articles_id, articles_set, domain1_score = read_asap_dataset()
-    generate_xgboost_train_set(articles_id, articles_set, domain1_score, "AES_FinalTestcases/prompt8/contractions_aes_prompt8.csv", "dataset/asap_xgboost_adv.npz")
+    generate_xgboost_train_set(articles_id, articles_set, domain1_score, "AES_testcases/prompt8/contractions_aes_prompt8.csv", "dataset/asap_xgboost_adv.npz")
     print("Done")
