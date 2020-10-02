@@ -1420,6 +1420,5 @@ def main():
                 raise ValueError("train_file_path is invalid.")
             test(estimator, test_file_path, correspond_test_id_set, handmark_scores, articles_set, articles_id, sp)
 
-
 if __name__ == "__main__":
     main()

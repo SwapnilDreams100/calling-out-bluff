@@ -54,11 +54,13 @@ random_state = 0
 #    from memn2n_kv import MemN2N_KV
 
 from memn2n_kv import MemN2N_KV
+
 # print flags info
 orig_stdout = sys.stdout
 timestamp = time.strftime("%b_%d_%Y_%H:%M:%S", time.localtime())
 folder_name = 'essay_set_{}_cv_{}_{}'.format(essay_set_id, num_samples, timestamp)
-out_dir = os.path.abspath(os.path.join(os.path.curdir, "runs", folder_name))
+
+out_dir = os.path.abspath(os.path.join(os.path.curdir,"calling-out-bluff","Model5-MemoryNets", "runs", folder_name))
 if not os.path.exists(out_dir):
     os.makedirs(out_dir)
 
@@ -78,7 +80,8 @@ with open(out_dir+'/params', 'w') as f:
         f.write("\n")
 
 # hyper-parameters end here
-training_path = 'training_set_rel3.tsv'
+m_path = 'calling-out-bluff/Model5-MemoryNets/'
+training_path = m_path + 'training_set_rel3.tsv'
 essay_list, resolved_scores, essay_id = data_utils.load_training_data(training_path, essay_set_id)
 
 max_score = max(resolved_scores)
