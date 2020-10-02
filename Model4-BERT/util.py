@@ -427,7 +427,7 @@ class BertWorker:
 
 
 def read_dataset_into_tfrecord(dataset_path, bw: BertWorker):
-    dataset_positive_path = os.path.join(dataset_path, "prompt.csv")
+    dataset_positive_path = os.path.join(dataset_path, "prompt8.csv")
     print("DSS", dataset_positive_path)
     tf_record_path = os.path.join(dataset_path, "asap_dataset_prompt.tfrecord")
 
@@ -831,7 +831,7 @@ if __name__ == "__main__":
             result[i + 1] = encodes
     np.savez(prompt_npz, features=result)
     bw = BertWorker()
-    bw.inference_from_path_with_permfile(m_path+"dataset/prompt8.csv")
+    # bw.inference_from_path_with_permfile(m_path+"dataset/prompt8.csv")
     read_dataset_into_tfrecord(m_path+"dataset/", bw)
     
     articles_id, articles_set, domain1_score = read_asap_dataset()
