@@ -611,7 +611,7 @@ def input_fn_from_tfrecord(tfrecord_path, batch_size, is_training, element_ids):
 
     """
     print("TFRECORD_PATH", tfrecord_path)
-    prompts_embedding_path = os.path.join(sys_conf["data_dir"], "prompt.npz")
+    prompts_embedding_path = os.path.join(sys_conf["data_dir"], "prompt8.npz")
     print("PROMPTS_EMBEDDING_PATH", prompts_embedding_path)
     if os.path.exists(prompts_embedding_path):
         prompts_embedding = np.load(prompts_embedding_path, allow_pickle=True)["features"][()]
@@ -675,7 +675,7 @@ def input_fn_from_tfrecord(tfrecord_path, batch_size, is_training, element_ids):
 
 def read_adv_sample():
     # asap数据集的相关参数，配置，这里做全局变量使用，方便下面三个score predictor调用
-    adv_csv_file_path = os.path.join("AES_FinalTestcases/prompt1/contractions_aes_prompt1.csv")
+    adv_csv_file_path = os.path.join("AES_FinalTestcases/prompt8/contractions_aes_prompt8.csv")
     print("ADV_CSV_FILE_PATH", adv_csv_file_path)
     if not os.path.exists(adv_csv_file_path):
         raise ValueError("adv_file_path is invalid.")
@@ -730,8 +730,33 @@ def read_asap_dataset():
         set_ids[articles_set[i]].append(articles_id[i])
     
     return articles_id, articles_set, domain1_score
-    # return articles_id, articles_set, set_ids, handmark_scores
-
+    
+def read_asap_dataset2():
+    # asap数据集的相关参数，配置，这里做全局变量使用，方便下面三个score predictor调用
+    asap_csv_file_path = os.path.join(sys_conf["data_dir"], "prompt8.csv")
+    print("ASAP_CSV_FILE_PATH", asap_csv_file_path)
+    if not os.path.exists(asap_csv_file_path):
+        raise ValueError("asap_file_path is invalid.")
+    asap_dataset = pd.read_csv(asap_csv_file_path, encoding='utf-8')
+#     asap_dataset = pd.read_csv(asap_csv_file_path, encoding='ISO-8859-1')
+    articles_id = list(asap_dataset["essay_id"])
+    articles_set = list(asap_dataset["essay_set"])
+    domain1_score = asap_dataset["domain1_score"]
+    handmark_scores = dict(zip(articles_id, domain1_score))
+    set_ids = {
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: []
+    }
+    for i in range(len(articles_id)):
+        set_ids[articles_set[i]].append(articles_id[i])
+    
+    return articles_id, articles_set, set_ids, handmark_scores
 
 def generate_xgboost_train_set(articles_id,
                                articles_set,
@@ -835,5 +860,5 @@ if __name__ == "__main__":
     read_dataset_into_tfrecord(m_path+"dataset/", bw)
     
     articles_id, articles_set, domain1_score = read_asap_dataset()
-    generate_xgboost_train_set(articles_id, articles_set, domain1_score, "AES_FinalTestcases/prompt1/contractions_aes_prompt8.csv", "dataset/asap_xgboost_adv.npz")
+    generate_xgboost_train_set(articles_id, articles_set, domain1_score, "AES_FinalTestcases/prompt8/contractions_aes_prompt8.csv", "dataset/asap_xgboost_adv.npz")
     print("Done")
