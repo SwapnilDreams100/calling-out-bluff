@@ -821,19 +821,19 @@ def sentence_tokenize(documents):
 
 if __name__ == "__main__":
     # 使用bert对prompt进行encode
-#     bc = BertClient(check_length=False)
-#     result = {}
-#     prompt_npz = "dataset/prompt8.npz"
-#     with open("dataset/prompt8.csv", "r", encoding="ISO-8859-1") as reader:
-#         for i, line in enumerate(reader):
-#             sentences = sentence_tokenize(line.strip())
-#             encodes = bc.encode(sentences)
-#             result[i + 1] = encodes
-#     np.savez(prompt_npz, features=result)
-#     bw = BertWorker()
-#     bw.inference_from_path_with_permfile()
-#     read_dataset_into_tfrecord("dataset/", bw)
+    bc = BertClient(check_length=False)
+    result = {}
+    prompt_npz = m_path + "dataset/prompt8.npz"
+    with open(m_path+"dataset/prompt8.csv", "r", encoding="ISO-8859-1") as reader:
+        for i, line in enumerate(reader):
+            sentences = sentence_tokenize(line.strip())
+            encodes = bc.encode(sentences)
+            result[i + 1] = encodes
+    np.savez(prompt_npz, features=result)
+    bw = BertWorker()
+    bw.inference_from_path_with_permfile()
+    read_dataset_into_tfrecord(m_path+"dataset/", bw)
     
-#     articles_id, articles_set, domain1_score = read_asap_dataset()
-#     generate_xgboost_train_set(articles_id, articles_set, domain1_score, "AES_FinalTestcases/prompt1/contractions_aes_prompt1.csv", "dataset/asap_xgboost_adv.npz")
+    articles_id, articles_set, domain1_score = read_asap_dataset()
+    generate_xgboost_train_set(articles_id, articles_set, domain1_score, "AES_FinalTestcases/prompt1/contractions_aes_prompt1.csv", "dataset/asap_xgboost_adv.npz")
     print("Done")
