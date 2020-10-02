@@ -729,8 +729,8 @@ def read_asap_dataset():
     for i in range(len(articles_id)):
         set_ids[articles_set[i]].append(articles_id[i])
     
-#     return articles_id, articles_set, domain1_score
-    return articles_id, articles_set, set_ids, handmark_scores
+    return articles_id, articles_set, domain1_score
+    # return articles_id, articles_set, set_ids, handmark_scores
 
 
 def generate_xgboost_train_set(articles_id,
