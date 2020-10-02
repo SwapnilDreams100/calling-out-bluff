@@ -1190,6 +1190,7 @@ class OverallScorePredictor:
                    eval_set=[(test_features, test_handmark_normalized_scores)],
                    early_stopping_rounds=100,
                    verbose=True)
+        os.mkdir(saved_model_dir)
         xgb_rg.save_model(os.path.join(saved_model_dir, "osp3.xgboost"))
         
         print("MAX AND MIN", max_value, min_value)
