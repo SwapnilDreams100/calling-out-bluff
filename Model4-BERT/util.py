@@ -831,9 +831,9 @@ if __name__ == "__main__":
             result[i + 1] = encodes
     np.savez(prompt_npz, features=result)
     bw = BertWorker()
-    bw.inference_from_path_with_permfile()
+    bw.inference_from_path_with_permfile(m_path+"dataset/prompt8.csv")
     read_dataset_into_tfrecord(m_path+"dataset/", bw)
     
     articles_id, articles_set, domain1_score = read_asap_dataset()
-    generate_xgboost_train_set(articles_id, articles_set, domain1_score, "AES_FinalTestcases/prompt1/contractions_aes_prompt1.csv", "dataset/asap_xgboost_adv.npz")
+    generate_xgboost_train_set(articles_id, articles_set, domain1_score, "AES_FinalTestcases/prompt1/contractions_aes_prompt8.csv", "dataset/asap_xgboost_adv.npz")
     print("Done")
