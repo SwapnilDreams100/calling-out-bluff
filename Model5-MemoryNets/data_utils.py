@@ -75,7 +75,7 @@ def load_glove(token_num=6, dim=50):
     # first word is nil
     word2vec.append([0]*dim)
     count = 1
-    with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "glove/glove."+str(token_num)+
+    with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "glove/glove."+str(6)+
                            "B." + str(dim) + "d.txt"), encoding="utf-8") as f:
         for line in f:
             l = line.split()
