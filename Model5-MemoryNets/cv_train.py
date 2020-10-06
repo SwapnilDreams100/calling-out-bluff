@@ -48,12 +48,12 @@ num_samples = FLAGS.num_samples
 num_tokens = FLAGS.token_num
 test_batch_size = batch_size
 random_state = 0
-#if is_regression:
-#    from memn2n_kv_regression import MemN2N_KV
-#else:
-#    from memn2n_kv import MemN2N_KV
+if is_regression:
+   from memn2n_kv_regression import MemN2N_KV
+else:
+   from memn2n_kv import MemN2N_KV
 
-from memn2n_kv import MemN2N_KV
+# from memn2n_kv import MemN2N_KV
 
 # print flags info
 orig_stdout = sys.stdout

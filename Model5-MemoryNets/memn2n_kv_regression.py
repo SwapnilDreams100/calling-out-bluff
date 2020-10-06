@@ -98,7 +98,7 @@ class MemN2N_KV(object):
         self._memory_value_size = memory_value_size
         self._encoding = tf.constant(position_encoding(self._story_size, self._embedding_size), name="encoding")
         self._reader = reader
-        self._build_inputs()
+        self.ops = self._build_inputs()
 
         d = feature_size
         self._feature_size = feature_size
@@ -189,11 +189,16 @@ class MemN2N_KV(object):
             
             self._query = tf.placeholder(tf.int32, [None, self._query_size], name='essay')
 
+            self.inter, self.stepsize, self.ref = ig.linear_interpolation(self._query, num_steps=50)
+            
             self._score_encoding = tf.placeholder(tf.float32, [None], name='score')
             self.keep_prob = tf.placeholder(tf.float32, name='keep_prob')
             self.w_placeholder = tf.placeholder(tf.float32, [self._vocab_size, self._embedding_size])
             self._mem_attention_encoding = tf.placeholder(tf.int32, [None, self._memory_key_size])
 
+    def explain(self, q):
+        feed_dict = {self.ops["query"]: q}
+        return self.sesh.run(self.ops["explanations"], feed_dict=feed_dict)
     '''
     mkeys: the vector representation for keys in memory
     -- shape of each mkeys: [1, embedding_size]
